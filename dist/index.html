@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="main" style="background: #000"></div>
+<input id="txt">
+<div id="add1">添加文字</div>
+<div id="add2">添加带边框文字</div>
+<div id="add3">添加礼物</div>
+<div id="close">开关</div>
+<div id="pause">暂停</div>
+<div id="changeSize">尺寸改变</div>
+<script type="text/javascript" src="js/index.js?06e64dea8ac2032796a6"></script></body>
+<script>
+    /**
+     * 弹幕数据例子
+     */
+    var barrageTxt = [
+        {type:2,txt:'3444444444444444444444',speed:1,txtFillStyle:'#fff',txtFont: '20px microsoft YaHei',boxSet:{padding:10,height:40}},
+        {type:2,txt:'fffffffffffffffffff',speed:1,txtFillStyle:'#fff',txtFont: '30px microsoft YaHei',boxSet:{padding:5,height:40}},
+        {type:2,txt:'fffffffffffffffffff',speed:1,txtFillStyle:'#fff',txtFont: '10px microsoft YaHei',boxSet:{padding:5,height:40}},
+        {type:3,txt:'ssssssssssssssssss4',speed:1,txtFillStyle:'#fff',txtFont: '30px microsoft YaHei',gift:{url:'http://f1.img4399.com/box~cp/1862016/09/18/14_Ki04rf.70x70.png~250x250',num:1,width:50,height:50}},
+        {type:3,txt:'ssssssssssssssssss4',speed:1,txtFillStyle:'#fff',txtFont: '25px microsoft YaHei',gift:{url:'http://f1.img4399.com/box~cp/1862016/09/18/14_Ki04rf.70x70.png~250x250',num:4,width:50,height:50}},
+        {type:1,txt:'3444ddddddddddddddddddddddddddddddddddddd444444444',speed:1,txtFillStyle:'#fff',txtFont: '30px microsoft YaHei'},
+    ];
+    /**
+     * 初始化
+     */
+    var barrage = new Barrage({
+        eleId: 'main',
+        canvasId: 'canvas',
+        canvasWidth: 1000,
+        canvasHeight: 500,
+        lineHeight: 50,
+        txtFont: '30px microsoft YaHei',
+        txtFillStyle: '#000',
+        maxShowNum: 40
+    });
+    /**
+     * 添加文字
+     */
+    document.getElementById('add1').onclick = function () {
+        barrage.addText({type:1,txt:document.getElementById('txt').value,speed:1,txtFillStyle:'#fff',txtFont: '30px microsoft YaHei'});
+    };
+    /**
+     * 添加带边框文字
+     */
+    document.getElementById('add2').onclick = function () {
+        barrage.addText({type:2,txt:document.getElementById('txt').value,speed:1,txtFillStyle:'#fff',txtFont: '30px microsoft YaHei',boxSet:{padding:5,height:40}});
+    };
+    /**
+     * 礼物
+     */
+    document.getElementById('add3').onclick = function () {
+        barrage.addText({type:3,txt:'若～～只如初见 送出 金币',speed:1,txtFillStyle:'#fff',txtFont: '30px microsoft YaHei',gift:{url:'http://f1.img4399.com/box~cp/1862016/09/18/14_Ki04rf.70x70.png~250x250',num:4,width:50,height:50}});
+    };
+    /**
+     * 弹幕开关
+     */
+    document.getElementById('close').onclick = function () {
+        barrage.isHide = !barrage.isHide;
+        document.getElementById('close').innerHTML = '开关' + barrage.isHide;
+        if (barrage.isHide) {
+            barrage.clearCanvas();
+        }
+    };
+    /**
+     * 弹幕暂停
+     */
+    document.getElementById('pause').onclick = function () {
+        barrage.isPaused = !barrage.isPaused;
+        document.getElementById('pause').innerHTML = '暂停' + barrage.isPaused;
+    };
+    /**
+     * 尺寸切换
+     */
+    var isSmallSize = true;
+    document.getElementById('changeSize').onclick = function () {
+        if (isSmallSize) {
+            isSmallSize = false;
+            barrage.changesize(1600,1000);
+        } else {
+            isSmallSize = true;
+            barrage.changesize(500,500);
+        }
+
+        for (var i = 0; i < barrageTxt.length; i++) {
+            barrage.addText(barrageTxt[i]);
+        }
+    };
+    /**
+     * 默认添加
+     */
+    for (var i = 0; i < barrageTxt.length; i++) {
+        barrage.addText(barrageTxt[i]);
+    }
+</script>
+</html>
